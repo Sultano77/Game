@@ -12,10 +12,10 @@ class Player(pygame.sprite.Sprite):
         self.velocity = 5
         self.score = 0
         self.all_projectiles = pygame.sprite.Group()
-        self.image = pygame.image.load('assets/player.png')
+        self.image = pygame.image.load('assets/Pikatchu.png')
         self.rect = self.image.get_rect()
-        self.rect.x = 400
-        self.rect.y = 500
+        self.rect.x = 200
+        self.rect.y = 550
 
     def damage (self,amount):
         #infliger degats:

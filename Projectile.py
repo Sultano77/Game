@@ -9,11 +9,11 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__()
         self.velocity = 5
         self.player=player
-        self.image = pygame.image.load('assets/projectile.png')
+        self.image = pygame.image.load('assets/eclair.png')
         self.rect = self.image.get_rect()
         self.image = pygame.transform.scale(self.image, (50,50))
-        self.rect.x = player.rect.x +120
-        self.rect.y = player.rect.y + 80
+        self.rect.x = player.rect.x +90
+        self.rect.y = player.rect.y + 40
         self.rect.center = self.rect.center
         self.origin_image =self.image
         self.angle=0

@@ -15,10 +15,11 @@ screen = pygame.display.set_mode((1080, 720))
 background = pygame.image.load('assets/bg.jpg')
 
 #charger notre banniere
-banner = pygame.image.load('assets/banner.png')
-banner = pygame.transform.scale(banner,(500,500))
+banner = pygame.image.load('assets/Pokemon.png')
+banner = pygame.transform.scale(banner,(450,250))
 banner_rect = banner.get_rect()
-banner_rect.x = math.ceil(screen.get_width() /4)
+banner_rect.x = math.ceil(screen.get_width() /3.5)
+banner_rect.y = math.ceil(screen.get_height() /6)
 
 #charger le bouton
 button = pygame.image.load('assets/button.png')
