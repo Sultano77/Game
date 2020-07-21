@@ -1,10 +1,11 @@
 import pygame
 import random
 import time
-import pandas as pd
+import Window
 from Player import Player
 from Monster import Monster
 from Meteorite import Meteorite
+
 
 class Game:
 
@@ -38,13 +39,7 @@ class Game:
         self.player.health=self.player.health_max
         # intialiser le nom du joueur dans une base de données:
 
-        df = pd.read_csv('assets/Classement.csv',header = 0, sep=',')
-        print(df)
-        ''' for d_score in df['Score']:
-            if self.player.score>=d_score:
-                df.loc[len(df.index)+1]=['Toto',self.player.score]
-        '''
-        df.to_csv( 'assets/Classement.csv',  encoding='utf-8', index=False)
+        Window.MEP_Interface_Classement(self.player.score)
         print(self.player.score)
         self.isPlaying = False
 

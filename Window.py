@@ -1,47 +1,50 @@
-from tkinter import *
+import tkinter         # import de tkinter
 import pandas as pd
 
-class IHM(Frame):
-    def __init__(self, fenetre, height, width):
-        Frame.__init__(self, fenetre)
-        self.numberLines = height
-        self.numberColumns = width
-        self.pack(fill=BOTH)
-        self.data = list()
-        self.df = pd.read_csv('assets/Classement.csv', header=0, sep=',')
-        self.Label= Entry(self, text="First Name")
-        self.Label.grid(row=0,column=1)
-        """self.e1 = Entry(self)
-        self.e1.grid(row=0, column=1) 
-        """
-        print(self.df)
+def put_score(b , score_pseudo , name_pseudo):
+    print(score_pseudo)
+    df = pd.read_csv('assets/Classement.csv', header=0, sep=',')
+    #test si le score est dans les 10 premiers:
+    i_pseudo = 1
+    b_one_time=False
+    while i_pseudo <= df['Nom'].count() and i_pseudo<=10:
+        if score_pseudo>=df.iloc[i_pseudo-1][1] and b_one_time==False:
+            df.loc[df['Nom'].count()] = [name_pseudo,score_pseudo]
+            b_one_time=True
+        i_pseudo=i_pseudo+1
+    #trie decroissant #charger dans le fichier
+    df.sort_values(by = 'Score', ascending = False).to_csv('assets/Classement.csv', encoding='utf-8', index=False )
 
-        """for i in range(self.numberLines):
-            line = list()
-            for j in range(self.numberColumns):
-                cell = Entry(self)
-                cell.insert(0, 0)
-                line.append(cell)
-                cell.grid(row=i, column=j)
-            self.data.append(line)
+    #restitution sur l'interface user
+    df = pd.read_csv('assets/Classement.csv', header=0, sep=',')
+    i_pseudo = 1
+    while i_pseudo <= df['Nom'].count() and i_pseudo<=10:
+        print(df.iloc[i_pseudo - 1][0])
+        l_pseudo = tkinter.Label(text=df.iloc[i_pseudo - 1][0])
+        l_pseudo.grid(column=0, row=i_pseudo + 1)
+        if score_pseudo > df.iloc[i_pseudo - 1][1]:
+            l_pseudo = tkinter.Label(text=df.iloc[i_pseudo - 1][0])
+            l_pseudo.grid(column=0, row=i_pseudo + 1)
 
-        self.results = list()
-        for i in range(self.numberColumns):
-            cell = Entry(self)
-            cell.insert(0, 0)
-            cell.grid(row=self.numberLines, column=i)
-            self.results.append(cell)
-        self.buttonSum = Button(self, text="somme des colonnes", fg="red", command=self.sumCol)
-        self.buttonSum.grid(row=self.numberLines, column=self.numberColumns)
+        l_score = tkinter.Label(text=df.iloc[i_pseudo - 1][1])
+        l_score.grid(column=1, row=i_pseudo + 1)
+        i_pseudo = i_pseudo + 1
+    b['state'] = tkinter.DISABLED
 
-    def sumCol(self):
-        for j in range(self.numberColumns):
-            result = int(0)
-            for i in range(self.numberLines):
-                result += int(self.data[i][j].get())
-            self.results[j].delete(0, END)
-            self.results[j].insert(0, result)
-"""
-fenetre = Tk()
-interface = IHM(fenetre, 10, 2)
-interface.mainloop()
+
+def MEP_Interface_Classement(score):
+    root = tkinter.Tk ()   # création de la fenêtre principale
+
+    l = tkinter.Label (text = "Pseudo (" + str(score) + ")")
+    l.grid (column = 0, row = 0)
+
+    s = tkinter.Entry ()
+    s.grid (column = 1, row = 0)
+
+    b = tkinter.Button (root,text = "Add Pseudo",command=lambda:put_score(b,score,s.get()))
+    b.grid(column = 2, row = 0)
+
+    l = tkinter.Label (text = "CLASSEMENT")
+    l.grid (column = 1, row = 1)
+
+    root.mainloop ()
