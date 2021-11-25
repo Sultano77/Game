@@ -27,7 +27,7 @@ class Game:
         # ajouter un timer pour declencher l'avalanche
         for i in range(random.randint(10, 40)):
             self.avalanche_meteorites()
-        # ajout entre 1 et 9 monstres
+        # ajout entre 1 et 5 monstres
         for i in range(random.randint(1, 5)):
             self.spawn_monster()
         print(2 , time.clock())
