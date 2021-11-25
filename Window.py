@@ -18,7 +18,6 @@ def put_score(b , score_pseudo , name_pseudo):
     #restitution sur l'interface user
     df = pd.read_csv('assets/Classement.csv', header=0, sep=',')
     i_pseudo = 1
-
     while i_pseudo <= df['Nom'].count() and i_pseudo<=10:
         print(df.iloc[i_pseudo - 1][0])
         l_pseudo = tkinter.Label(text=df.iloc[i_pseudo - 1][0])
