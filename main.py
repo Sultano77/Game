@@ -2,7 +2,7 @@ import pygame
 from Game import *
 from Player import *
 import math
-
+print('hello')
 
 pygame.init()
 
